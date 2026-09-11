@@ -35,7 +35,7 @@ export default function RankedTable({
           {rankLabel}
         </p>
         <div className="flex-1" />
-        <span className="text-[11px] text-color-muted2">
+        <span className="text-[11px] text-color-p">
           {selected.size} selected
         </span>
       </div>
@@ -78,14 +78,14 @@ export default function RankedTable({
               {/* Name + meta */}
               <div className="min-w-0 flex-1">
                 <div className="text-[13px] text-color-h1">{row.name}</div>
-                <div className="text-[11px] text-color-muted2">{row.meta}</div>
+                <div className="text-[11px] text-color-p">{row.meta}</div>
               </div>
 
               {/* Loss */}
               <div className="text-sm font-semibold text-color-h1">
                 −{row.loss}
                 {perMonth && (
-                  <span className="text-[11px] font-normal text-color-muted2">
+                  <span className="text-[11px] font-normal text-color-p">
                     /mo
                   </span>
                 )}

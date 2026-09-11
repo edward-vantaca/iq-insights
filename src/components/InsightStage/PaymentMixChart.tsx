@@ -43,7 +43,7 @@ export default function PaymentMixChart({ chart, benchmark, delta }: Props) {
       </div>
 
       {/* Benchmark + delta */}
-      <div className="mt-3.5 flex gap-6 text-xs text-color-muted2">
+      <div className="mt-3.5 flex gap-6 text-xs text-color-p">
         <span>
           Peer benchmark: <span className="text-color-h2">{benchmark}</span>
         </span>

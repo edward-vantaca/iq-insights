@@ -36,7 +36,7 @@ export default function InsightEvidence({
               delta={insight.delta}
             />
             <div
-              className="mt-5 text-sm leading-[1.65] text-color-p"
+              className="mt-5 text-sm leading-[1.65] text-color-h2"
               dangerouslySetInnerHTML={{ __html: insight.narrative }}
             />
           </div>

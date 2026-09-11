@@ -16,7 +16,7 @@ export default function InsightHero({ insight, onCta }: Props) {
         >
           {insight.category.toUpperCase()}
         </div>
-        <div className="text-xs text-color-muted2">
+        <div className="text-xs text-color-p">
           Financial briefing · {insight.date}
         </div>
         <div className="flex-1" />
@@ -31,10 +31,10 @@ export default function InsightHero({ insight, onCta }: Props) {
       {/* Big figure */}
       <div
         className="font-extrabold leading-[.95] text-color-h1"
-        style={{ fontSize: 112, letterSpacing: '-.04em' }}
+        style={{ fontSize: 72, letterSpacing: '-.04em' }}
       >
         {insight.figure}
-        <span className="font-medium text-color-muted2" style={{ fontSize: 40 }}>
+        <span className="font-medium text-color-p" style={{ fontSize: 28 }}>
           {insight.figureSuffix}
         </span>
       </div>
@@ -55,13 +55,13 @@ export default function InsightHero({ insight, onCta }: Props) {
         >
           {insight.cta} →
         </button>
-        <div className="text-[13px] text-color-muted2">
+        <div className="text-[13px] text-color-p">
           or scroll for the breakdown
         </div>
       </div>
 
       {/* Evidence marker */}
-      <div className="mt-11 text-[11px] tracking-[.15em] text-color-muted3">
+      <div className="mt-11 text-[11px] tracking-[.15em] text-color-p">
         ▼ EVIDENCE
       </div>
     </div>

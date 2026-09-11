@@ -53,55 +53,6 @@ html, body, #root {
     .dark-only {
       display: none;
     }
-
-    @media (prefers-color-scheme: dark) {
-      --iq-h1-color: #dde7ee;
-      --iq-h2-color: #bacfde;
-      --iq-p-color: #bac3ca;
-      --iq-card-color: #27292b;
-      --iq-border-color: #373b3e;
-      --iq-grid-color: #4f5259;
-      --iq-stage-color: #1e1e1f;
-      --iq-stage-border-color: #423d48;
-      --iq-cell-color: #2b2e31;
-      --iq-cell-hover-color: #2a2f32;
-      --iq-input-color: #232324;
-      --iq-input-border-color: #545a5f;
-      --iq-input-error-color: #633640;
-      --iq-input-error-border-color: #633640;
-      --iq-danger-color: #f6377d;
-      --iq-warning-color: #ecbd13;
-      --iq-cancel-color: #4e505f;
-      --iq-success-color: #16e955;
-      --iq-action-color: #3c70d7;
-      --iq-brand-color: #0f98fa;
-      --iq-badge-color: #50b4fb;
-      --iq-active-color: #0f98fa;
-      --iq-active-nav-bg-color: #212022;
-      --iq-overlay-color: #1a191a;
-      --iq-pipe-color: #545a5f;
-      --iq-muted2-color: #5b6577;
-      --iq-muted3-color: #3d4759;
-      --iq-infobox-color: #334d5c;
-      --iq-gray-50: #1d283a;
-      --iq-gray-100: #344256;
-      --iq-gray-200: #48576a;
-      --iq-gray-300: #65758b;
-      --iq-gray-400: #94a3b8;
-      --iq-gray-500: #cbd5e1;
-      --iq-gray-600: #e1e7ef;
-      --iq-gray-700: #f8fafc;
-      --iq-gray-800: #f1f5f9;
-      --iq-gray-900: #ffffff;
-
-      .light-only {
-        display: none;
-      }
-
-      .dark-only {
-        display: inherit;
-      }
-    }
   }
 
   .dark {
@@ -143,6 +94,9 @@ html, body, #root {
     --iq-gray-700: #f8fafc;
     --iq-gray-800: #f1f5f9;
     --iq-gray-900: #ffffff;
+
+    .light-only { display: none; }
+    .dark-only  { display: inherit; }
   }
 }
 
