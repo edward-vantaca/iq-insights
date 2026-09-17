@@ -6,6 +6,8 @@ type Props = {
 }
 
 export default function InsightHero({ insight, onCta }: Props) {
+  const isReal = insight.dataSource === 'real'
+
   return (
     <div className="px-16 pb-10 pt-14" style={{ background: insight.hero }}>
       {/* Category chip + date + actions */}
@@ -18,6 +20,16 @@ export default function InsightHero({ insight, onCta }: Props) {
         </div>
         <div className="text-xs text-color-p">
           Financial briefing · {insight.date}
+        </div>
+        <div
+          className="rounded px-2.5 py-1 text-[11px] font-semibold tracking-[.06em]"
+          style={{
+            background: isReal ? 'rgba(74,163,255,.12)' : 'rgba(242,184,102,.16)',
+            color: isReal ? '#2f7fd0' : '#a6702a',
+          }}
+          title={insight.sourceNote}
+        >
+          {isReal ? 'PROTOTYPE · REAL DATA' : 'PROTOTYPE · ILLUSTRATIVE'}
         </div>
         <div className="flex-1" />
         <button className="rounded-md border border-color-stage-border bg-color-card px-3 py-1.5 text-[11px] text-color-h2 shadow-sm transition-colors hover:border-color-h2">
@@ -45,6 +57,10 @@ export default function InsightHero({ insight, onCta }: Props) {
         style={{ fontSize: 22 }}
       >
         {insight.headline}
+      </div>
+
+      <div className="mt-2.5 max-w-[820px] text-[12px] text-color-muted2">
+        {insight.sourceNote}
       </div>
 
       {/* CTA row */}

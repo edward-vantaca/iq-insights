@@ -17,15 +17,16 @@ export default function InsightEvidence({
   onSelectAll,
   onNudge,
 }: Props) {
+  const rows = insight.rows ?? []
+  const hasRows = rows.length > 0
   const selCount = selected.size
   const nudgeLabel =
     selCount === 0 ? 'Select rows to act' : `${insight.nudge} (${selCount})`
-  const selectAllLabel =
-    selCount === insight.rows.length ? 'Clear' : 'Select all'
+  const selectAllLabel = selCount === rows.length ? 'Clear' : 'Select all'
 
   return (
     <div className="border-t border-color-hr bg-color-card px-16 py-12">
-      <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
+      <div className={`grid grid-cols-1 gap-8 ${hasRows ? 'xl:grid-cols-2' : ''}`}>
         {/* Chart card */}
         <div>
           <p className="mb-2 text-sm font-semibold text-color-h2">{insight.chartLabel}</p>
@@ -42,12 +43,13 @@ export default function InsightEvidence({
           </div>
         </div>
 
-        {/* Ranked table card */}
+        {/* Ranked table card. Absent for packages with no row-level data. */}
+        {hasRows && (
         <RankedTable
-          rows={insight.rows}
+          rows={rows}
           selected={selected}
           accent={insight.accent}
-          rankLabel={insight.rankLabel}
+          rankLabel={insight.rankLabel ?? ''}
           nudgeLabel={nudgeLabel}
           selectAllLabel={selectAllLabel}
           perMonth={insight.id !== 'ap'}
@@ -55,6 +57,7 @@ export default function InsightEvidence({
           onSelectAll={onSelectAll}
           onNudge={onNudge}
         />
+        )}
       </div>
     </div>
   )

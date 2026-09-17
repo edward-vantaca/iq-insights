@@ -4,6 +4,7 @@ import Navbar from './components/Layout/Navbar'
 import NavPanel from './components/Layout/NavPanel'
 import DerivedInsights from './pages/DerivedInsights'
 import Dashboard from './pages/Dashboard'
+import { ClientProvider } from './context/ClientContext'
 
 export default function App() {
   const [mobileNavVisible, setMobileNavVisible] = useState(false)
@@ -16,6 +17,7 @@ export default function App() {
   }, [darkMode])
 
   return (
+    <ClientProvider>
     <div className="mx-auto h-full bg-color-stage">
       <Navbar
         toggleMobileNav={setMobileNavVisible}
@@ -44,5 +46,6 @@ export default function App() {
         </div>
       </div>
     </div>
+    </ClientProvider>
   )
 }

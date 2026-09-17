@@ -1,5 +1,30 @@
 export type InsightId = 'ar' | 'ap' | 'rev'
 
+export type ClientId =
+  | 'jea'
+  | 'essex'
+  | 'lighthouse'
+  | 'hoaorg'
+  | 'trust'
+  | 'greenacre'
+  | 'beacon'
+  | 'access'
+
+export type Client = {
+  id: ClientId
+  name: string
+  short: string
+  /** Which insight packages this client actually has. Drives the rail. */
+  insights: InsightId[]
+}
+
+/**
+ * Where a card's numbers came from. AR is computed from production Databricks
+ * tables; AP and Revenue Manager have no pipeline yet and come from the static
+ * insight packages. The card says which, so nobody compares them as equals.
+ */
+export type DataSource = 'real' | 'illustrative'
+
 export type ChartSegment = {
   label: string
   pct: number
@@ -32,12 +57,15 @@ export type Insight = {
   benchmark: string
   delta: string
   narrative: string
-  rankLabel: string
-  rows: InsightRow[]
+  rankLabel?: string
+  /** Absent when the package has no row-level data (AP, Revenue Manager). */
+  rows?: InsightRow[]
   nudge: string
   placeholder: string
   suggestions: string[]
   mockA: string
+  dataSource: DataSource
+  sourceNote: string
 }
 
 export type ChatMessage = {

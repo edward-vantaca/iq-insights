@@ -2,9 +2,10 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, faMoon } from '@fortawesome/pro-regular-svg-icons'
+import { faSun, faMoon, faChevronDown } from '@fortawesome/pro-regular-svg-icons'
 import BrandLight from '../../assets/vantaca-iq-light.png'
 import BrandDark from '../../assets/vantaca-iq-dark.png'
+import { useClient } from '../../context/ClientContext'
 
 type Props = {
   toggleMobileNav: React.Dispatch<React.SetStateAction<boolean>>
@@ -13,6 +14,8 @@ type Props = {
 }
 
 export default function Navbar({ toggleMobileNav, darkMode, toggleDarkMode }: Props) {
+  const { clients, client, setClientId } = useClient()
+
   return (
     <nav className="relative z-20 border-b border-color-hr bg-color-card shadow-iq-navbar print:hidden">
       <div className="mx-auto sm:px-6 lg:px-8 lg:pl-6">
@@ -50,11 +53,48 @@ export default function Navbar({ toggleMobileNav, darkMode, toggleDarkMode }: Pr
             </Link>
           </div>
 
-          {/* Right: Beta badge + dark mode toggle + user avatar */}
+          {/* Right: client switcher + dark mode toggle + user avatar */}
           <div className="absolute inset-y-0 right-0 flex items-center gap-3 pr-4 sm:static sm:inset-auto sm:pr-4">
-            <span className="hidden rounded border border-color-border px-2 py-0.5 text-xs font-medium text-color-p sm:inline-block">
-              Beta
-            </span>
+            {/* Client switcher. Prototype only -- a real deployment scopes the
+                page to the signed-in customer, it does not let them pick. */}
+            <Menu as="div" className="relative hidden sm:block">
+              <Menu.Button className="flex items-center gap-2 rounded border border-color-border px-2.5 py-1 text-xs font-medium text-color-h2 transition-colors hover:border-color-h2">
+                <span className="max-w-[190px] truncate">{client.name}</span>
+                <FontAwesomeIcon icon={faChevronDown} className="h-2.5 w-2.5 text-color-p" />
+              </Menu.Button>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-30 mt-2 w-72 origin-top-right overflow-hidden rounded-md border border-color-hr bg-color-card py-1 shadow-lg focus:outline-none">
+                  <p className="px-3 pb-1.5 pt-2 text-[10px] font-semibold uppercase tracking-[.08em] text-color-muted2">
+                    Prototype client
+                  </p>
+                  {clients.map((c) => (
+                    <Menu.Item key={c.id}>
+                      {({ active }) => (
+                        <button
+                          onClick={() => setClientId(c.id)}
+                          className={`flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm ${
+                            active ? 'bg-color-stage' : ''
+                          } ${c.id === client.id ? 'font-semibold text-color-h1' : 'text-color-h2'}`}
+                        >
+                          <span className="truncate">{c.name}</span>
+                          <span className="flex-shrink-0 text-[10px] uppercase tracking-[.06em] text-color-muted2">
+                            {c.insights.join(' · ')}
+                          </span>
+                        </button>
+                      )}
+                    </Menu.Item>
+                  ))}
+                </Menu.Items>
+              </Transition>
+            </Menu>
             <button
               onClick={toggleDarkMode}
               className="flex h-8 w-8 items-center justify-center rounded-full text-color-h2 hover:bg-color-stage"
